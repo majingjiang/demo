@@ -5,16 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
  
   <groupId>com.test.springboot</groupId>
-  <artifactId>springboot-apply</artifactId>
+  <artifactId>demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>springboot-apply</name>
-  <url>http://www.example.com</url>
-  
+  <name>demo</name>
+  <packaging>war</packaging>
   <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.2.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
    </parent>
    
    <properties>
@@ -29,11 +27,6 @@
          <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
  
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
   	
 	<dependency>
 		<groupId>junit</groupId>
@@ -41,6 +34,7 @@
 		<version>4.11</version>
 		<scope>test</scope>
 	</dependency>
+	
   </dependencies>
  
   <build>
@@ -50,6 +44,38 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
         </plugin>
+        
+        
+           <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>support.CreateTarget</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
       </plugins>
     </pluginManagement>
   </build>
